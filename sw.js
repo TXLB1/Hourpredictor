@@ -1,5 +1,5 @@
 // sw.js
-const CACHE_NAME = 'crypto-hourly-v1';
+const CACHE_NAME = 'crypto-hourly-v2';
 const ASSETS = [
   './',
   './index.html',
