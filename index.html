@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hourly Crypto Prognosis</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0b1221">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Hourly Crypto Prognosis</h1>
+    <div class="status">
+      <span id="netStatus">offline</span>
+      <span id="lastUpdate">—</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="row">
+        <label for="symbolSelect">Coin</label>
+        <select id="symbolSelect">
+          <option value="BTCUSDT">BTC/USDT</option>
+          <option value="ETHUSDT">ETH/USDT</option>
+          <option value="XRPUSDT">XRP/USDT</option>
+          <option value="SOLUSDT">SOL/USDT</option>
+        </select>
+
+        <label for="confidence">Min confidence</label>
+        <input id="confidence" type="number" min="0.5" max="0.95" step="0.01" value="0.62">
+
+        <button id="startBtn">Start</button>
+        <button id="stopBtn" disabled>Stop</button>
+      </div>
+      <div class="row">
+        <small>Abstain if confidence below this threshold.</small>
+      </div>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Current Price</h3>
+        <div class="big" id="price">—</div>
+        <div class="sub" id="hourOpen">Hour open: —</div>
+      </div>
+
+      <div class="card">
+        <h3>Prediction</h3>
+        <div class="big" id="prediction">—</div>
+        <div class="sub" id="confidenceOut">Confidence: —</div>
+        <div class="sub" id="reasoning">Signals: —</div>
+      </div>
+
+      <div class="card">
+        <h3>State</h3>
+        <div class="sub">Prior: <span id="prior">—</span></div>
+        <div class="sub">Volatility (ATR 30d): <span id="atr">—</span></div>
+        <div class="sub">Last closed hour: <span id="lastHourDir">—</span></div>
+      </div>
+    </section>
+
+    <section class="chartbox">
+      <canvas id="priceChart"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <div class="fineprint">
+      <span>Educational use only. No financial advice.</span>
+      <a href="https://api.binance.com" target="_blank" rel="noopener">Binance API</a>
+    </div>
+  </footer>
+
+  <script src="binance.js"></script>
+  <script src="model.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
